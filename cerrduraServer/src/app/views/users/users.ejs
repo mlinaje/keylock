@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="utf-8">
+   <title></title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+   </head>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+       <a href="#" class="navbar-brand mx-auto">Cerradura Server Admin</a>
+    </nav>
+     
+	<div class="container">	
+		<div class="row">
+					
+				<div class="col-md-5 mt-4 card">
+              <h4 class="card-title" style="margin-top: 10px; margin-bottom: 25px;">Gestión de usuarios</h4>
+							
+						<form action="/alta">
+							<button type="submit" class="btn btn-primary" style="margin-bottom: 25px">Dar de alta usuarios</button>		
+						</form>	 
+							
+						<form action="/listarUsers" method="post" >
+							<input type="submit" class="btn btn-primary" value="Listar usuarios" style="margin-bottom: 25px">												
+						</form>
+						
+						<form action="/bajaUser" method="post" >
+							<input type="submit" class="btn btn-primary" value="Dar de baja usuario" style="margin-bottom: 5px">
+							<input type="text" name="userBaja" class="form-control" 
+									placeholder="Introduzca el nombre de usuario que desea dar de baja." style="margin-bottom: 10px;">												
+						</form>
+						
+ 					<h4 class="card-title" style="margin-top: 10px; margin-bottom: 25px;">Gestión de cerraduras</h4>						
+						
+						<form action="/allUsersOn" method="post">
+							<input type="submit" class="btn btn-primary" value="Cerradura On a todos los Usuarios" style="margin-bottom: 10px">
+						</form>						
+						
+						<form action="/allUsersOff" method="post">
+							<input type="submit" class="btn btn-primary" value="Cerradura Off a todos los Usuarios" style="margin-bottom: 25px">
+						</form>							
+						
+						<form action="/listarCerraduras" method="post" >
+							<input type="submit" class="btn btn-primary" value="Listar cerraduras" style="margin-bottom: 5px">
+							<input type="text" name="user" class="form-control" placeholder="Introduzca el nombre de usuario." style="margin-bottom: 25px">												
+						</form>				
+			   </div>
+			
+			 <% if(mostrarU) { %>
+				<div class="col-md-6 mt-4 text-center">
+					<table class="table table-striped">
+							<tr>
+									<th>Usuario</th>
+									<th>Fecha Subs.</th>						
+							</tr>
+							<% for(var i = 0; i < user.length ; i++)  { %>
+									<tr>
+											<td><%= user[i].user %></td>
+											<td><%= user[i].date_subs %></td>									
+									</tr>							
+							<%}%>
+					</table>
+			</div>	
+			<% } %>
+			
+			<% if(mostrarD) { %>
+				<div class="col-md-5 mt-4 text-center">
+				<h5>Usuario: <%= cerraduras[0].user %></h5>
+					<table class="table table-striped">
+							<tr>
+									<th>Nombre Cerradura</th>
+									<th>Estado</th>
+									<th>Preferencia</th>						
+							</tr>
+							<% for(var i = 0; i < cerraduras.length ; i++)  { %>
+									<tr>
+											<td><%= cerraduras[i].nomCerradura %></td>
+											<td><%= cerraduras[i].estado %></td>	
+											<td><%= cerraduras[i].preferencia %></td>									
+									</tr>							
+							<%}%>
+					</table>
+					
+						 <form action="/cambiarEstado" method="post" >
+							<input type="submit" class="btn btn-primary" value="Cambiar estado" style="margin-bottom: 5px; margin-top: 10px;">
+							<input type="hidden" name="user" value="<%= cerraduras[0].user %>">
+							<input type="text" name="nomCerradura" class="form-control" placeholder="Introduzca el nombre de la cerradura." style="margin-bottom: 5px">
+							<input type="text" name="estado" class="form-control" placeholder="Introduzca el estado ( on / off  ) " style="margin-bottom: 10px">												
+						</form>		
+
+						 <form action="/cambiarPreferencia" method="post" >
+							<input type="submit" class="btn btn-primary" value="Cambiar preferencia" style="margin-bottom: 5px; margin-top: 10px;">
+							<input type="hidden" name="user" value="<%= cerraduras[0].user %>">
+							<input type="text" name="nomCerradura" class="form-control" placeholder="Introduzca el nombre de la cerradura." style="margin-bottom: 5px">
+							<input type="text" name="estado" class="form-control" placeholder="Introduzca el estado ( on / off  ) " style="margin-bottom: 10px">												
+						</form>		
+						
+						 <form action="/bajaCerradura" method="post" >
+							<input type="submit" class="btn btn-primary" value="Eliminar cerradura" style="margin-bottom: 5px; margin-top: 10px;">
+							<input type="hidden" name="user" value="<%= cerraduras[0].user %>">
+							<input type="text" name="nomCerradura" class="form-control" placeholder="Introduzca el nombre de la cerradura." style="margin-bottom: 15px">												
+						</form>
+			</div>	
+			<% } %>
+						
+		</div>
+	   </div>
+	   
+		<form action="/login">
+			<button type="submit" style="margin-top: 100px; margin-left: 20px">Salir</button>		
+		</form>	   
+	   	
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="utf-8">
+   <title></title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+   </head>
+
+  <body>
+   <nav class="navbar navbar-dark bg-dark">
+       <a href="/login" class="navbar-brand mx-auto">Administración</a>
+    </nav>
+     
+	<div class="container">	
+		<div class="row">			
+				<div class="col-md-5 mt-4 card">
+                <h4 class="card-title" style="margin-top: 10px; margin-bottom: 25px;">Sign In</h4>
+						<form action="/userSign" method="post" id="formSign">
+					  			<input type="text" class="form-control" name="user" placeholder="Usuario">
+					  			<input type="text" class="form-control" name="nomCerradura" placeholder="Nombre cerradura"  style="margin-top: 10px">
+
+								<select name="idCerradura" style="margin-top: 10px" form="formSign">
+								   <option value=0>Seleccione la cerradura a la que desea registrarse:</option>
+									<option value="396B872DE6B4">Puerta externa Edif. de investigación</option>
+									<option value="673BO87D2EB4">Puerta externa Smart Open Lab</option>
+								</select>					  		
+					  		
+					  			<input type="password" class="form-control" name="pin" placeholder="PIN (5 núms)" style="margin-top: 10px">
+					  			<input type="text" class="form-control" name="uuidTarjeta" placeholder="uuID Tarjeta RFID" style="margin-top: 10px">
+					  			<input type="text" class="form-control" name="nombre" placeholder="Nombre" style="margin-top: 10px">
+					  			<input type="text" class="form-control" name="apellidos" placeholder="Apellidos" style="margin-top: 10px">
+					  			<input type="text" class="form-control" name="email" placeholder="E-mail" style="margin-top: 10px">
+					  			
+					  			<button class="btn btn-primary" type="submit" style="margin-top: 20px; margin-bottom: 10px;">Registrar</button>
+					  </form>	
+		      </div>
+	   </div>	
+	      <%  if(errorRegistro) { %>
+		   	<p class="alert alert-danger"> <b>Ha ocurrido un error al completar el registro!</b> Compruebe los campos introducidos.</p>		          
+		   <% } %>	
+	       <% if(registrado) { %>
+				<p class="alert alert-info"> <b>Te has registrado correctamente!</b> Ya puedes comenzar a usar la cerradura electrónica.</p>		      
+		   <% } %>
+
+  </body>
+</html>
